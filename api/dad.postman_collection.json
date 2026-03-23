@@ -1,0 +1,721 @@
+{
+	"info": {
+		"_postman_id": "ab4ea518-aa1d-467a-bb3a-d9c5a3d3c991",
+		"name": "dad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49016513",
+		"_collection_link": "https://jgcfmsilva-jgs-4922941.postman.co/workspace/Jorge-Gabriel-Silva's-Workspace~9328aa64-4fc8-467b-8716-91cf2b45a784/collection/49016513-ab4ea518-aa1d-467a-bb3a-d9c5a3d3c991?action=share&source=collection_link&creator=49016513"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"item": [
+						{
+							"name": "register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"João Silva\",\n  \"email\": \"joao.silva@example.com\",\n  \"nickname\": \"joaosilva123\",\n  \"password\": \"Password!9\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURLDad}}/api/register",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "validateEmail",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURLDad}}/api/email/verify/526/5afabd54863272644677ebe9a886b915e2203cb5?expires=1763856673&signature=b5df051b02c68ed65ad34b5275bec719423165aabc8b47b48bf8d539291b0e1d\n\n",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"email",
+										"verify",
+										"526",
+										"5afabd54863272644677ebe9a886b915e2203cb5"
+									],
+									"query": [
+										{
+											"key": "expires",
+											"value": "1763856673"
+										},
+										{
+											"key": "signature",
+											"value": "b5df051b02c68ed65ad34b5275bec719423165aabc8b47b48bf8d539291b0e1d\n\n"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Login/Logout",
+					"item": [
+						{
+							"name": "login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"testJoao@mail.pt\",\n    \"password\": \"Password123!\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURLDad}}/api/login",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokendad}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "YS7sRpnf6Kt9Ir2xPqrEnAHRBm9dKWrHrQ9PDyHd",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURLDad}}/api/logout",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ForgetPassword",
+					"item": [
+						{
+							"name": "passwordResetRequest",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"joaosilvanovo@example.com\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURLDad}}/api/password/email",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"password",
+										"email"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "validateTokenResetPassword",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURLDad}}:80/api/password/reset/verify?token=d7c4cd3d623d865970ea52ac6cbf74d3436efdbaa2f216c640f2099ecf46562c&email=joao.silva%40example.com",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"port": "80",
+									"path": [
+										"api",
+										"password",
+										"reset",
+										"verify"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": "d7c4cd3d623d865970ea52ac6cbf74d3436efdbaa2f216c640f2099ecf46562c"
+										},
+										{
+											"key": "email",
+											"value": "joao.silva%40example.com"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "resetPassword",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"token\": \"cd16fd54eec0c0ceceea5c051e3253fc4fe16489bc6b4f4ec2a6fbc262376b7f\",\r\n    \"email\": \"admin.novo@example.com\",\r\n    \"password\": \"Password12!\",\r\n    \"password_confirmation\": \"Password12!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURLDad}}/api/password/reset",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"password",
+										"reset"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PlayerUserProfile",
+			"item": [
+				{
+					"name": "DeleteAccount",
+					"item": [
+						{
+							"name": "deleteAccountRequest",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokendad}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseURLDad}}/api/player/profile/526/delete-request",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"player",
+										"profile",
+										"526",
+										"delete-request"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteAccountTokenVerify",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURLDad}}/api/player/profile/526/delete-confirm?expires=1764287900&signature=4d51799a99702effbff6a19c1b41c1af483cdf35973aeec4c351bfeed262eb23",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"player",
+										"profile",
+										"526",
+										"delete-confirm"
+									],
+									"query": [
+										{
+											"key": "expires",
+											"value": "1764287900"
+										},
+										{
+											"key": "signature",
+											"value": "4d51799a99702effbff6a19c1b41c1af483cdf35973aeec4c351bfeed262eb23"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "deleteAccount",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokendad}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"password\": \"Password123!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURLDad}}/api/player/profile/526/delete-confirm?expires=1764287900&signature=4d51799a99702effbff6a19c1b41c1af483cdf35973aeec4c351bfeed262eb23",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"player",
+										"profile",
+										"526",
+										"delete-confirm"
+									],
+									"query": [
+										{
+											"key": "expires",
+											"value": "1764287900"
+										},
+										{
+											"key": "signature",
+											"value": "4d51799a99702effbff6a19c1b41c1af483cdf35973aeec4c351bfeed262eb23"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "PlayerInfo",
+					"item": [
+						{
+							"name": "getUserbyIdPrivate",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokendad}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-XSRF-TOKEN",
+										"value": "YS7sRpnf6Kt9Ir2xPqrEnAHRBm9dKWrHrQ9PDyHd",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{baseURLDad}}/api/player/profile/526",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"player",
+										"profile",
+										"526"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "getPlayerByIdPublic",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURLDad}}/api/player/profile/public/1",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"player",
+										"profile",
+										"public",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "updateUserProfile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokendad}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"João Silva\",\r\n  \"photo_avatar_filename\": \"avatatr.jpg\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURLDad}}/api/player/profile/526",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"player",
+										"profile",
+										"526"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "UpdatePassword",
+					"item": [
+						{
+							"name": "updatePassword",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokendad}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"current_password\": \"NovaSenha@456\",\r\n  \"password\": \"Password123!\",\r\n  \"password_confirmation\": \"Password123!\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURLDad}}/api/player/profile/526/password",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"player",
+										"profile",
+										"526",
+										"password"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "UserInfo",
+					"item": [
+						{
+							"name": "getUser",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokendad}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURLDad}}/api/admin/users/526",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"users",
+										"526"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "BlockUser",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokendad}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseURLDad}}/api/admin/users/500/block",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"users",
+										"500",
+										"block"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UnBlockUser",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokendad}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PATCH",
+								"header": [],
+								"url": {
+									"raw": "{{baseURLDad}}/api/admin/users/500/unblock",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"users",
+										"500",
+										"unblock"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "ActiveAdmins",
+					"item": [
+						{
+							"name": "ActiveAdmin",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokendad}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"testJoao@mail.pt\",\n    \"password\": \"Password123!\"\n}"
+								},
+								"url": {
+									"raw": "{{baseURLDad}}/api/admin/active-admins",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"active-admins"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "CreateAdmins",
+					"item": [
+						{
+							"name": "CreateAdmin",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{tokendad}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"Admin Novo\",\r\n  \"email\": \"admin.novo@example.com\",\r\n  \"nickname\": \"adminnovo\",\r\n  \"password\": \"SenhaForte1!\",\r\n  \"password_confirmation\": \"SenhaForte1!\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURLDad}}/api/admin/admins",
+									"host": [
+										"{{baseURLDad}}"
+									],
+									"path": [
+										"api",
+										"admin",
+										"admins"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURLDad",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "tokendad",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

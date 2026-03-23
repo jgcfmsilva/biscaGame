@@ -1,0 +1,18 @@
+services:
+  frontend-dev:
+    image: node:20-alpine
+    container_name: dad-frontend-dev
+    working_dir: /app
+    volumes:
+      - .:/app
+    command: sh -c "npm install && npm run dev -- --host 0.0.0.0 --port 5173"
+    ports:
+      - "5173:5173"
+    restart: unless-stopped
+    networks:
+      - sail
+
+networks:
+  sail:
+    external: true
+    name: api_sail

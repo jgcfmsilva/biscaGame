@@ -1,0 +1,43 @@
+# MUDANÇA: Subimos de php:8.2 para php:8.3 para suportar as dependências
+FROM php:8.4-cli-alpine
+
+# Instala dependências do sistema
+RUN apk add --no-cache \
+    libpng-dev \
+    oniguruma-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    git \
+    curl \
+    postgresql-dev \
+    linux-headers \
+    $PHPIZE_DEPS
+
+# Instala extensões do PHP nativas
+RUN docker-php-ext-install pdo_pgsql mbstring exif pcntl bcmath gd
+
+# Instala a extensão Redis via PECL e ativa-a
+RUN pecl install redis && docker-php-ext-enable redis
+
+# Instala o Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Define a pasta de trabalho
+WORKDIR /var/www/html
+
+# Copia todo o código da pasta 'api' para dentro da imagem
+COPY . .
+
+# Instala as dependências do Laravel (SEM --no-dev para o Seeder funcionar)
+RUN composer install --no-interaction --optimize-autoloader
+
+# Dá permissões de escrita às pastas de logs e cache
+RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
+
+# Expõe a porta 8000
+EXPOSE 8000
+
+# Comando por defeito
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8000"]

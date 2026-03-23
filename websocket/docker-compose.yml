@@ -1,0 +1,22 @@
+services:
+  websocket:
+    build: .
+    image: dad-websocket
+    container_name: dad-websocket
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_PORT: 3000
+      NODE_BACKEND: http://laravel.test
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_PASSWORD: ""
+      REDIS_PREFIX: "bisca-database-"
+    restart: unless-stopped
+    networks:
+      - sail
+
+networks:
+  sail:
+    external: true
+    name: api_sail
